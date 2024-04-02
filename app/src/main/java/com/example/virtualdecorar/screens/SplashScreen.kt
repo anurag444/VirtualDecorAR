@@ -1,5 +1,6 @@
 package com.example.virtualdecorar.screens
 
+import android.content.Context
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
@@ -23,13 +24,14 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.example.virtualdecorar.MainActivity
 import com.example.virtualdecorar.R
 import com.example.virtualdecorar.navigation.AppScreens
 import com.example.virtualdecorar.ui.theme.LightGreen1
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
+fun SplashScreen(navController: NavHostController, context: MainActivity) {
 
     //alpha value to animate the text
     val alpha = remember {
@@ -43,8 +45,15 @@ fun SplashScreen(navController: NavHostController) {
         delay(1000)
 
         //this will clear the back stack for us
+        val name:String = if (!onBoardingFinished(context)){
+            AppScreens.OnBoardingScreen.name
+        } else{
+            AppScreens.HomeScreen.name
+
+        }
+
         navController.popBackStack()
-        navController.navigate(AppScreens.OnBoardingScreen.name)
+        navController.navigate(name)
     }
 
     Column(modifier = Modifier
@@ -60,6 +69,11 @@ fun SplashScreen(navController: NavHostController) {
         Text(text = "Virtual Decor", fontSize = 24.sp, color = LightGreen1,
             modifier = Modifier.alpha(alpha.value))
     }
+}
+
+private fun onBoardingFinished(context: MainActivity): Boolean {
+    val sharedPref = context.getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+    return sharedPref.getBoolean("isFinished", false)
 }
 
 @Composable
