@@ -1,53 +1,72 @@
 package com.example.virtualdecorar.screens
 
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.virtualdecorar.R
-import com.example.virtualdecorar.ui.theme.Green
-import com.example.virtualdecorar.ui.theme.WhiteSHADE2
-import kotlinx.coroutines.CoroutineScope
-import kotlin.coroutines.CoroutineContext
+import com.example.virtualdecorar.navigation.AppScreens
+import com.example.virtualdecorar.ui.theme.LightGreen1
+import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navController: NavHostController) {
 
-
-
-    Box(modifier = Modifier
-        .fillMaxSize()
-        .background(color = Green),
-        contentAlignment = Alignment.Center){
-        Row (verticalAlignment = Alignment.CenterVertically){
-            Image(painterResource(id = R.drawable.furniture), contentDescription = "furniture icon",
-                modifier = Modifier
-                    .size(48.dp)
-                    .padding(4.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop)
-
-            Text(text = "VirtualDecor",
-                style = MaterialTheme.typography.displaySmall,
-                fontSize = 28.sp,
-                color = WhiteSHADE2,
-                modifier = Modifier.padding(start = 4.dp))
-        }
+    //alpha value to animate the text
+    val alpha = remember {
+        Animatable(0f)
     }
+    
+    LaunchedEffect(key1 = true){
+        alpha.animateTo(1f,
+            animationSpec = tween(2000)
+        )
+        delay(1000)
+
+        //this will clear the back stack for us
+        navController.popBackStack()
+        navController.navigate(AppScreens.OnBoardingScreen.name)
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+
+        LoaderAnimation(
+            modifier = Modifier.size(200.dp),
+            anim = R.raw.splash
+        )
+        Text(text = "Virtual Decor", fontSize = 24.sp, color = LightGreen1,
+            modifier = Modifier.alpha(alpha.value))
+    }
+}
+
+@Composable
+fun LoaderAnimation(modifier: Modifier, anim: Int) {
+    val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(anim))
+
+    LottieAnimation(composition = composition,
+        iterations = LottieConstants.IterateForever,
+        modifier = modifier)
 }
