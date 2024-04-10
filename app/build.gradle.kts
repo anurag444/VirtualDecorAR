@@ -88,6 +88,9 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    //Material Icons
+    implementation("androidx.compose.material:material-icons-extended-android:1.6.5")
+
     //Lottie
     val lottieVersion = "5.2.0"
     implementation("com.airbnb.android:lottie-compose:$lottieVersion")

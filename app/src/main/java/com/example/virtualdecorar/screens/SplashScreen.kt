@@ -48,7 +48,7 @@ fun SplashScreen(navController: NavHostController, context: MainActivity) {
         val name:String = if (!onBoardingFinished(context)){
             AppScreens.OnBoardingScreen.name
         } else{
-            AppScreens.HomeScreen.name
+            AppScreens.LoginScreen.name
 
         }
 
