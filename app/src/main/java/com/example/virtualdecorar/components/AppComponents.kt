@@ -26,6 +26,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -88,11 +89,7 @@ fun TextBoldHeading(value: String) {
 }
 
 @Composable
-fun InputField(label: String, painterResource: Painter) {
-
-    var textValue = remember {
-        mutableStateOf("")
-    }
+fun InputField(label: String, painterResource: Painter, textValue: MutableState<String>) {
 
     OutlinedTextField(
         modifier = Modifier
@@ -119,13 +116,9 @@ fun InputField(label: String, painterResource: Painter) {
 }
 
 @Composable
-fun InputPasswordField(label: String, painterResource: Painter) {
+fun InputPasswordField(label: String, painterResource: Painter, password: MutableState<String>) {
 
     val localFocusManager = LocalFocusManager.current
-
-    val password = remember {
-        mutableStateOf("")
-    }
 
     val passwordVisible = remember {
         mutableStateOf(false)
@@ -237,8 +230,8 @@ fun ClickableTextComponent(value: String, onTextSelected: (String) -> Unit) {
 }
 
 @Composable
-fun ButtonComponent(value: String) {
-    Button(onClick = { /*TODO*/ },
+fun ButtonComponent(value: String, onLogin: () -> Unit) {
+    Button(onClick = onLogin,
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(48.dp),

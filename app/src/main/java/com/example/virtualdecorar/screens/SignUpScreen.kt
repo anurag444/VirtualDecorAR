@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -38,25 +40,46 @@ fun SignupScreen(navController: NavController) {
                 .fillMaxSize()
                 .background(White)
         ) {
+
+            var email = remember {
+                mutableStateOf("")
+            }
+
+            var password = remember {
+                mutableStateOf("")
+            }
+
+            var firstName = remember {
+                mutableStateOf("")
+            }
+
+            var lastName = remember {
+                mutableStateOf("")
+            }
+
             NormalTextSmallHeading(value = "Hey There,")
             TextBoldHeading(value = "Create Account")
             
             Spacer(modifier = Modifier.height(20.dp))
             InputField(
                 "First Name",
-                painterResource(id = R.drawable.profile)
+                painterResource(id = R.drawable.profile),
+                firstName
             )
             InputField(
                 "Last Name",
-                painterResource(id = R.drawable.profile)
+                painterResource(id = R.drawable.profile),
+                lastName
             )
             InputField(
                 "Email",
-                painterResource(id = R.drawable.email)
+                painterResource(id = R.drawable.email),
+                email
             )
             InputPasswordField(
                 "Password",
-                painterResource(id = R.drawable.password)
+                painterResource(id = R.drawable.password),
+                password
             )
 
             CheckBoxComponent("By continuing, you accept our Privacy Policy and Terms of Use"){
@@ -66,7 +89,9 @@ fun SignupScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(80.dp))
 
-            ButtonComponent("Register")
+            ButtonComponent("Register"){
+
+            }
 
             DividerComponent()
 

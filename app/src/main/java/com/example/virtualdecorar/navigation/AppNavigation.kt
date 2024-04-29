@@ -6,7 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.virtualdecorar.MainActivity
 import com.example.virtualdecorar.screens.HomeScreen
-import com.example.virtualdecorar.screens.LoginScreen
+    import com.example.virtualdecorar.screens.LoginScreen
 import com.example.virtualdecorar.screens.SignupScreen
 import com.example.virtualdecorar.screens.OnBoardingScreen
 import com.example.virtualdecorar.screens.SplashScreen
