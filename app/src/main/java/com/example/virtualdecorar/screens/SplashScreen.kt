@@ -24,7 +24,7 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.example.virtualdecorar.MainActivity
+import com.example.virtualdecorar.ui.MainActivity
 import com.example.virtualdecorar.R
 import com.example.virtualdecorar.navigation.AppScreens
 import com.example.virtualdecorar.ui.theme.LightGreen1
@@ -48,7 +48,7 @@ fun SplashScreen(navController: NavHostController, context: MainActivity) {
         val name:String = if (!onBoardingFinished(context)){
             AppScreens.OnBoardingScreen.name
         } else{
-            AppScreens.LoginScreen.name
+            AppScreens.HomeScreen.name
 
         }
 

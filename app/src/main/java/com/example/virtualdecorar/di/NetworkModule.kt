@@ -1,6 +1,5 @@
 package com.example.virtualdecorar.di
 
-import com.example.virtualdecorar.network.LoginAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,19 +14,19 @@ class NetworkModule {
 
     val ngrokUrl = "https://3d1d-2607-fea8-999-ca00-e226-d7cd-3d58-92f9.ngrok-free.app"
 
-    @Singleton
-    @Provides
-    fun providesRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(ngrokUrl + "/api/Registeration/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun providesRegisterService(retrofit: Retrofit): LoginAPI {
-        return retrofit.create(LoginAPI::class.java)
-    }
+//    @Singleton
+//    @Provides
+//    fun providesRetrofit(): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(ngrokUrl + "/api/Registeration/")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
+//
+//    @Singleton
+//    @Provides
+//    fun providesRegisterService(retrofit: Retrofit): LoginAPI {
+//        return retrofit.create(LoginAPI::class.java)
+//    }
 
 }

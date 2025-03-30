@@ -7,6 +7,9 @@ plugins {
 }
 
 android {
+    buildFeatures {
+        buildConfig = true // Ensure BuildConfig is enabled
+    }
     namespace = "com.example.virtualdecorar"
     compileSdk = 34
 
@@ -30,6 +33,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        with(BuildConfigFields.SKETCHFAB_API_KEY) {
+            val sketchFabApiKey = getProperty(value, "apikeys.properties")
+            forEach { buildType ->
+                buildType.buildConfigField(type, title, sketchFabApiKey)
+            }
         }
     }
     compileOptions {
@@ -63,11 +72,13 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose-android:2.8.7")
     testImplementation("junit:junit:4.13.2")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation ("com.google.dagger:dagger-producers:2.56")
 
     //View Model
     val lifecycleVersion = "2.7.0"
@@ -81,17 +92,22 @@ dependencies {
     val nav_version = "2.7.7"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.compose.material3:material3:1.3.1")
+    implementation("androidx.compose.foundation:foundation:1.7.8")
+    implementation("androidx.compose.material:material:1.7.8")
 
     //Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
 
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
     //Material Icons
-    implementation("androidx.compose.material:material-icons-extended-android:1.6.5")
+    implementation("androidx.compose.material:material-icons-extended-android:1.7.8")
 
     //Lottie
     val lottieVersion = "5.2.0"
@@ -107,6 +123,42 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-auth")
+
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-android-compiler:2.51")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0")
+
+    // Networking
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation("com.google.code.gson:gson:2.10.1")
+
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-paging:2.6.1")
+
+    // Paging
+    implementation("androidx.paging:paging-runtime:3.3.6")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha04")
+
+    // Logging & Utilities
+    implementation("com.jakewharton.timber:timber:5.0.1")
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("io.github.sceneview:sceneview:2.2.1")
+    implementation("io.github.sceneview:arsceneview:2.2.1")
+    implementation("com.google.ar:core:1.48.0"  )
+    implementation("com.google.android.filament:filament-android:1.52.0")
+    implementation("androidx.palette:palette:1.0.0")
 
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

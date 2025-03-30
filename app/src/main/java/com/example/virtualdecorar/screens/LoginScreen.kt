@@ -26,14 +26,13 @@ import com.example.virtualdecorar.components.TextBoldHeading
 import com.example.virtualdecorar.components.UnderlinedTextComponent
 import com.example.virtualdecorar.navigation.AppScreens
 import com.example.virtualdecorar.ui.theme.White
-import com.example.virtualdecorar.viewmodel.UserViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 
 
 @OptIn(DelicateCoroutinesApi::class)
 @Composable
 fun LoginScreen(navController: NavHostController) {
-    val viewModel: UserViewModel = hiltViewModel()
+    //val viewModel: UserViewModel = hiltViewModel()
 
     Surface(
         modifier = Modifier
@@ -77,7 +76,7 @@ fun LoginScreen(navController: NavHostController) {
             Spacer(modifier = Modifier.height(80.dp))
 
             ButtonComponent("Login"){
-                viewModel.login(email.value, password.value)
+                //viewModel.login(email.value, password.value)
             }
 
             DividerComponent()

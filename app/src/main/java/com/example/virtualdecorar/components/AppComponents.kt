@@ -51,6 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.virtualdecorar.ui.theme.Black
 import com.example.virtualdecorar.ui.theme.GraySHADE
+import com.example.virtualdecorar.ui.theme.Green
 import com.example.virtualdecorar.ui.theme.LightBlack1
 import com.example.virtualdecorar.ui.theme.LightGreen1
 import com.example.virtualdecorar.ui.theme.LightGreen2
@@ -100,7 +101,15 @@ fun InputField(label: String, painterResource: Painter, textValue: MutableState<
             focusedBorderColor = LightGreen1,
             unfocusedContainerColor = WhiteSHADE1,
             focusedContainerColor = WhiteSHADE1,
-            unfocusedBorderColor = WhiteSHADE1
+            unfocusedBorderColor = WhiteSHADE1,
+            focusedTextColor = LightBlack1,
+            unfocusedTextColor = LightBlack1,
+            focusedLabelColor = Black,
+            unfocusedLabelColor = Black,
+            focusedLeadingIconColor = Black,
+            unfocusedTrailingIconColor = Black,
+            unfocusedLeadingIconColor = Black,
+            focusedTrailingIconColor = Black
         ),
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -133,7 +142,15 @@ fun InputPasswordField(label: String, painterResource: Painter, password: Mutabl
             focusedBorderColor = LightGreen1,
             unfocusedContainerColor = WhiteSHADE1,
             focusedContainerColor = WhiteSHADE1,
-            unfocusedBorderColor = WhiteSHADE1
+            unfocusedBorderColor = WhiteSHADE1,
+            focusedTextColor = LightBlack1,
+            unfocusedTextColor = LightBlack1,
+            focusedLabelColor = Black,
+            unfocusedLabelColor = Black,
+            focusedLeadingIconColor = Black,
+            unfocusedLeadingIconColor = Black,
+            unfocusedTrailingIconColor = Black,
+            focusedTrailingIconColor = Black,
         ),
         label = { Text(text = label) },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
@@ -242,7 +259,7 @@ fun ButtonComponent(value: String, onLogin: () -> Unit) {
             .fillMaxWidth()
             .heightIn(48.dp)
             .background(
-                brush = Brush.horizontalGradient(listOf(LightGreen1, LightGreen2)),
+                color = Green,
                 shape = RoundedCornerShape(50.dp)
             ),
             contentAlignment = Alignment.Center
